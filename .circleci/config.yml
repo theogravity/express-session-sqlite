@@ -96,10 +96,7 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
-    jobs:
-      - test
-  publish:
+  build:
     jobs:
       - test
       - publish:
@@ -108,4 +105,4 @@ workflows:
               only: master
           requires:
             - test
-          context: org-global
+          context: npm-build
