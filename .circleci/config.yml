@@ -49,7 +49,7 @@ jobs:
     - run:
         name: Run tests
         command: |
-          npm run test
+          npm run test:ci
     - run:
         name: Build the libraries
         command: |

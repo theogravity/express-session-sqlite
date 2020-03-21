@@ -1,17 +1,17 @@
 {
-  "name": "boilerplate-typescript",
-  "private": true,
+  "name": "express-session-sqlite",
   "version": "1.0.0",
-  "description": "My personal boilerplate for new projects using typescript",
+  "description": "Session store using SQLite for express-session",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "build": "npm run build:clean && npm run compile",
+    "build": "npm run build:clean && npm run compile && cpx src/migrations/* build/migrations",
     "compile": "tsc",
     "build:clean": "rm -rf build/*",
     "debug": "ts-node-dev --inspect -- src/index.ts",
     "debug:break": "ts-node-dev --inspect-brk -- src/index.ts",
     "test": "jest",
+    "test:ci": "jest --ci --coverage",
     "test:debug": "node --inspect-brk node_modules/.bin/jest",
     "test:watch": "jest --watch",
     "test:coverage:watch": "jest --coverage --watch",
@@ -25,27 +25,35 @@
     "changelog:prepare": "changelog-version prepare",
     "changelog:release": "changelog-version release",
     "lint": "prettier-standard src/**/*.ts && standardx src/**/*.ts",
+    "sample-app": "ts-node-dev sample-app.ts",
     "ts-node-dev": "ts-node-dev"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theogravity/boilerplate.git"
+    "url": "git+https://github.com/theogravity/express-session-sqlite.git"
   },
   "author": "Theo Gravity <theo@suteki.nu>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/theogravity/boilerplate/issues"
+    "url": "https://github.com/theogravity/express-session-sqlite/issues"
   },
-  "homepage": "https://github.com/theogravity/boilerplate#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/theogravity/express-session-sqlite#readme",
+  "dependencies": {
+    "sql-template-strings": "^2.2.2",
+    "sqlite": "^3.0.3"
+  },
   "devDependencies": {
     "@theo.gravity/changelog-version": "2.1.10",
     "@theo.gravity/version-bump": "1.2.6",
+    "@types/express-session": "^1.17.0",
     "@types/jest": "25.1.4",
-    "@types/node": "^13.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
+    "@types/node": "^13.9.2",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "cpx": "^1.5.0",
     "eslint": "6.8.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "jest": "25.1.0",
     "jest-cli": "25.1.0",
     "jest-junit-reporter": "1.1.0",
@@ -55,7 +63,7 @@
     "standardx": "^5.0.0",
     "toc-md-alt": "^0.3.2",
     "ts-jest": "25.2.1",
-    "ts-node": "8.6.2",
+    "ts-node": "8.7.0",
     "ts-node-dev": "1.0.0-pre.44",
     "typescript": "3.8.3"
   },

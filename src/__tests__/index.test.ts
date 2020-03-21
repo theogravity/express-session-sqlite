@@ -1,5 +1,8 @@
 /* eslint-env jest */
 
-describe('Basic test', () => {
-  it('should be written', () => {})
+describe('index', () => {
+  it('includes the lib', () => {
+    const store = require('../index')
+    expect(store).toBeDefined()
+  })
 })

@@ -1,3 +1,3 @@
-const blah = 'abcd'
+import sqliteStoreFactory from './SqliteStore'
 
-console.log(blah)
+export default sqliteStoreFactory
