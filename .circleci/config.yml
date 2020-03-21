@@ -17,6 +17,7 @@ npm-login: &npm-login
 
 jobs:
   build:
+    context: org-global
     docker:
     # specify the version you desire here
     - image: circleci/node:12
@@ -31,7 +32,7 @@ jobs:
         # You need to add a deploy key with write permission in order for the CI to commit changes
         # back to the repo
         # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
-        - "c6:88:8c:c5:04:59:f2:e2:ae:f2:f8:c2:82:d4:89:59"
+        - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
     # Download and cache dependencies so subsequent builds run faster
     - restore_cache:
         keys:
