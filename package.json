@@ -1,7 +1,7 @@
 {
   "name": "express-session-sqlite",
   "version": "1.0.2",
-  "description": "Session store using SQLite for express-session",
+  "description": "SQLite-backed session store for express-session written in Typescript",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -88,7 +88,7 @@
   },
   "pre-commit": [
     "lint-staged",
-    "test",
+    "test:ci",
     "build"
   ]
 }
