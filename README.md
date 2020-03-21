@@ -1,10 +1,12 @@
 # express-session-sqlite
 
+[![npm version](https://badge.fury.io/js/express-session-sqlite.svg)](https://badge.fury.io/js/express-session-sqlite) ![built with typescript](https://camo.githubusercontent.com/92e9f7b1209bab9e3e9cd8cdf62f072a624da461/68747470733a2f2f666c61742e62616467656e2e6e65742f62616467652f4275696c74253230576974682f547970655363726970742f626c7565) [![CircleCI](https://circleci.com/gh/theogravity/express-session-sqlite/tree/master.svg?style=svg)](https://circleci.com/gh/theogravity/express-session-sqlite/tree/master)
+
 A session store for `express-session` using Sqlite.
 
 Intended for local development, not production.
 
-<!-- TOC -->
+Fully unit tested.
 
 ## Install
 
