@@ -25,76 +25,74 @@ jobs:
       tag: '12'
     working_directory: ~/repo
     steps:
-      # Check out the git repo to the working directory
-      - checkout
-      # Create the .npmrc file so npm can auth for publishing
-      - *npm-login
-      - add-ssh-keys:
-          fingerprints:
-            # You need to add a deploy key with write permission in order for the CI to commit changes
-            # back to the repo
-            # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
-            - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
-      # Download and cache dependencies so subsequent builds run faster
-      - restore_cache:
-          keys:
-            - dependencies-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - dependencies-
-      - run:
-          name: Install deps
-          command: |
-            npm i
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-{{ checksum "package-lock.json" }}
-      - run:
-          name: Run tests
-          command: |
-            npm run test:ci
-      - run:
-          name: Build the libraries
-          command: |
-            npm run build
+    # Check out the git repo to the working directory
+    - checkout
+    - add-ssh-keys:
+        fingerprints:
+          # You need to add a deploy key with write permission in order for the CI to commit changes
+          # back to the repo
+          # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
+          - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
+    # Download and cache dependencies so subsequent builds run faster
+    - restore_cache:
+        keys:
+          - dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - dependencies-
+    - run:
+        name: Install deps
+        command: |
+          npm i
+    - save_cache:
+        paths:
+          - node_modules
+        key: dependencies-{{ checksum "package-lock.json" }}
+    - run:
+        name: Run tests
+        command: |
+          npm run test:ci
+    - run:
+        name: Build the libraries
+        command: |
+          npm run build
   publish:
     executor:
       name: node/default
       tag: '12'
     working_directory: ~/repo
     steps:
-      # Check out the git repo to the working directory
-      - checkout
-      # Create the .npmrc file so npm can auth for publishing
-      - *npm-login
-      - add-ssh-keys:
-          fingerprints:
-            # You need to add a deploy key with write permission in order for the CI to commit changes
-            # back to the repo
-            # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
-            - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
-      # Download and cache dependencies so subsequent builds run faster
-      - restore_cache:
-          keys:
-            - dependencies-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - dependencies-
-      - run:
-          name: Install deps
-          command: |
-            npm i
-      - save_cache:
-          paths:
-            - node_modules
-          key: dependencies-{{ checksum "package-lock.json" }}
-      - run:
-          name: Build the libraries
-          command: |
-            npm run build
-      - run:
-          name: npm publish (master only)
-          command: |
-            .circleci/deploy.sh
+    # Check out the git repo to the working directory
+    - checkout
+    # Create the .npmrc file so npm can auth for publishing
+    - *npm-login
+    - add-ssh-keys:
+        fingerprints:
+          # You need to add a deploy key with write permission in order for the CI to commit changes
+          # back to the repo
+          # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
+          - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
+    # Download and cache dependencies so subsequent builds run faster
+    - restore_cache:
+        keys:
+          - dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - dependencies-
+    - run:
+        name: Install deps
+        command: |
+          npm i
+    - save_cache:
+        paths:
+          - node_modules
+        key: dependencies-{{ checksum "package-lock.json" }}
+    - run:
+        name: Build the libraries
+        command: |
+          npm run build
+    - run:
+        name: npm publish (master only)
+        command: |
+          .circleci/deploy.sh
 workflows:
   version: 2
   build_and_test:
