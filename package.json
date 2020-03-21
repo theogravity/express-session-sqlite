@@ -1,0 +1,79 @@
+{
+  "name": "boilerplate-typescript",
+  "private": true,
+  "version": "1.0.0",
+  "description": "My personal boilerplate for new projects using typescript",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "npm run build:clean && npm run compile",
+    "compile": "tsc",
+    "build:clean": "rm -rf build/*",
+    "debug": "ts-node-dev --inspect -- src/index.ts",
+    "debug:break": "ts-node-dev --inspect-brk -- src/index.ts",
+    "test": "jest",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest",
+    "test:watch": "jest --watch",
+    "test:coverage:watch": "jest --coverage --watch",
+    "toc": "toc-md README.md README.md",
+    "add-readme": "git add README.md",
+    "lint-staged": "lint-staged",
+    "prepare-publish": "npm run changelog:verify && version-bump && npm run changelog:release",
+    "version-bump": "version-bump",
+    "changelog:help": "changelog-version",
+    "changelog:verify": "changelog-version verify",
+    "changelog:prepare": "changelog-version prepare",
+    "changelog:release": "changelog-version release",
+    "lint": "prettier-standard src/**/*.ts && standardx src/**/*.ts",
+    "ts-node-dev": "ts-node-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theogravity/boilerplate.git"
+  },
+  "author": "Theo Gravity <theo@suteki.nu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theogravity/boilerplate/issues"
+  },
+  "homepage": "https://github.com/theogravity/boilerplate#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@theo.gravity/changelog-version": "2.1.10",
+    "@theo.gravity/version-bump": "1.2.6",
+    "@types/jest": "25.1.4",
+    "@types/node": "^13.9.1",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "6.8.0",
+    "jest": "25.1.0",
+    "jest-cli": "25.1.0",
+    "jest-junit-reporter": "1.1.0",
+    "lint-staged": "10.0.8",
+    "pre-commit": "1.2.2",
+    "prettier-standard": "16.2.1",
+    "standardx": "^5.0.0",
+    "toc-md-alt": "^0.3.2",
+    "ts-jest": "25.2.1",
+    "ts-node": "8.6.2",
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.8.3"
+  },
+  "standardx": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "prettier-standard",
+      "git add"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged",
+    "test",
+    "build"
+  ]
+}
