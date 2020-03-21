@@ -15,14 +15,6 @@ npm-login: &npm-login
     command: |
       echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
 
-ssh-keys: &ssh-keys
-  - add_ssh_keys:
-      fingerprints:
-        # You need to add a deploy key with write permission in order for the CI to commit changes
-        # back to the repo
-        # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
-        - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
-
 orbs:
   node: circleci/node@1.1.6
 
@@ -35,7 +27,12 @@ jobs:
     steps:
       # Check out the git repo to the working directory
       - checkout
-      - *ssh-keys
+      - add_ssh_keys:
+          fingerprints:
+            # You need to add a deploy key with write permission in order for the CI to commit changes
+            # back to the repo
+            # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
+            - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
       # Download and cache dependencies so subsequent builds run faster
       - restore_cache:
           keys:
@@ -68,7 +65,12 @@ jobs:
       - checkout
       # Create the .npmrc file so npm can auth for publishing
       - *npm-login
-      - *ssh-keys
+      - add_ssh_keys:
+          fingerprints:
+            # You need to add a deploy key with write permission in order for the CI to commit changes
+            # back to the repo
+            # https://circleci.com/docs/2.0/gh-bb-integration/#adding-readwrite-deployment-keys-to-github-or-bitbucket
+            - "ff:cd:c7:5f:06:20:48:64:7b:5a:2b:39:4d:67:fd:51"
       # Download and cache dependencies so subsequent builds run faster
       - restore_cache:
           keys:
@@ -91,6 +93,7 @@ jobs:
           name: npm publish (master only)
           command: |
             .circleci/deploy.sh
+
 workflows:
   version: 2
   build_and_test:
