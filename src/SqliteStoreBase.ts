@@ -1,4 +1,4 @@
-import * as sqlite from 'sqlite'
+import { open, Sqlite3Database } from 'sqlite'
 const SQL = require('sql-template-strings')
 import { join } from 'path'
 
@@ -34,7 +34,7 @@ export type AllSessionsResult =
 export class SqliteStoreBase {
   hasInit: boolean
   config: SqliteStoreParams
-  db: sqlite.Database
+  db: Sqlite3Database
   prefix: string
 
   constructor (config: SqliteStoreParams) {
@@ -50,7 +50,10 @@ export class SqliteStoreBase {
 
   async init () {
     if (!this.db) {
-      this.db = await sqlite.open(this.config.path, { cached: true })
+      this.db = await open({
+        filename: this.config.path,
+        cached: true
+      })
 
       await this.db.migrate({
         migrationsPath: join(__dirname, 'migrations')

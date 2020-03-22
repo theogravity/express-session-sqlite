@@ -47,7 +47,7 @@
   "homepage": "https://github.com/theogravity/express-session-sqlite#readme",
   "dependencies": {
     "sql-template-strings": "^2.2.2",
-    "sqlite": "^3.0.3"
+    "sqlite": "^4.0.0-beta.4"
   },
   "devDependencies": {
     "@theo.gravity/changelog-version": "2.1.10",
