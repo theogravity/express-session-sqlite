@@ -9,11 +9,12 @@ Fully unit tested. PRs welcomed.
 
 ## Install
 
-`$ npm i express-session-sqlite --save`
+`$ npm i express-session-sqlite sqlite3 --save`
 
 ## Usage
 
 ```typescript
+import sqlite3 from 'sqlite3'
 import express from 'express'
 import sqliteStoreFactory from 'express-session-sqlite'
 import session from 'express-session'
@@ -23,6 +24,9 @@ const app = express()
 
 app.use(session({
     store: new SqliteStore({
+      // Database library to use. Any library is fine as long as the API is compatible
+      // with sqlite3, such as sqlite3-offline
+      driver: sqlite3.Database,
       // for in-memory database
       // path: ':memory:'
       path: '/tmp/sqlite.db',
@@ -30,7 +34,7 @@ app.use(session({
       ttl: 1234,
       // (optional) Session id prefix. Default is no prefix.
       prefix: 'sess:',
-      // (optional) Triggers a timer in milliseconds to run a cleanup on expired session rows.
+      // (optional) Adjusts the cleanup timer in milliseconds for deleting expired session rows.
       // Default is 5 minutes.
       cleanupInterval: 300000
     }),

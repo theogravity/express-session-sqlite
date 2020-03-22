@@ -1,9 +1,13 @@
-import sqlite3 from 'sqlite3'
 import { open, Database } from 'sqlite'
 const SQL = require('sql-template-strings')
 import { join } from 'path'
 
 export interface SqliteStoreParams {
+  /**
+   * The sqlite3 Database driver to use
+   */
+  driver: any
+
   /**
    * The path to the sqlite database.
    * For an in-memory database, specify ':memory:'.
@@ -51,9 +55,17 @@ export class SqliteStoreBase {
 
   async init () {
     if (!this.db) {
+      if (!this.config.driver) {
+        throw new Error('express-session-sqlite: driver not defined')
+      }
+
+      if (!this.config.path) {
+        throw new Error('express-session-sqlite: path not defined')
+      }
+
       this.db = await open({
         filename: this.config.path,
-        driver: sqlite3.Database
+        driver: this.config.driver
       })
 
       await this.db.migrate({

@@ -1,5 +1,6 @@
 /* eslint-env jest */
 
+import sqlite3 from 'sqlite3'
 import { SqliteStoreBase } from '../SqliteStoreBase'
 
 let store
@@ -20,7 +21,8 @@ beforeEach(async () => {
   store = new SqliteStoreBase({
     path: ':memory:',
     ttl: 10000,
-    prefix: 'sess:'
+    prefix: 'sess:',
+    driver: sqlite3.Database
   })
 
   await store.set(SID, SAMPLE_DATA)
@@ -79,7 +81,8 @@ describe('SqliteStoreBase', () => {
     const s = new SqliteStoreBase({
       path: ':memory:',
       ttl: 0,
-      prefix: 'sess:'
+      prefix: 'sess:',
+      driver: sqlite3.Database
     })
 
     await s.set(SID, SAMPLE_DATA)

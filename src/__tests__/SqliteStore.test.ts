@@ -1,6 +1,7 @@
 /* eslint-env jest */
 /* eslint handle-callback-err: "warn" */
 
+import sqlite3 from 'sqlite3'
 import session from 'express-session'
 import SqliteStoreFactory from '../SqliteStore'
 
@@ -23,6 +24,7 @@ const SqliteStore = SqliteStoreFactory(session)
 beforeEach(done => {
   // @ts-ignore
   store = new SqliteStore({
+    driver: sqlite3.Database,
     path: ':memory:',
     ttl: 10000,
     prefix: 'sess:'
@@ -104,6 +106,7 @@ describe('SqliteStore', () => {
   it('should handle expired sessions', done => {
     // @ts-ignore
     const s = new SqliteStore({
+      driver: sqlite3.Database,
       path: ':memory:',
       ttl: 0,
       prefix: 'sess:'
