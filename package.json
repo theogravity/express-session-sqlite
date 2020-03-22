@@ -1,6 +1,6 @@
 {
   "name": "express-session-sqlite",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "SQLite-backed session store for express-session written in Typescript",
   "main": "build/index.js",
   "types": "build/index.d.ts",

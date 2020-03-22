@@ -1,4 +1,4 @@
-# UNRELEASED
+# 1.0.4 - Sun Mar 22 2020 11:59:50
 
 Updated `sqlite` to `4.0.0-beta.4`
 
