@@ -11,3 +11,4 @@ __mocks__/
 .version-bump.js
 tsconfig.json
 .changelog.js
+coverage/
