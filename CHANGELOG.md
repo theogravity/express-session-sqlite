@@ -1,4 +1,4 @@
-# UNRELEASED
+# 2.0.1 - Sun Mar 22 2020 23:55:58
 
 - Remove `sqlite3` as dependency.
 - Add new `driver` property to specify the sqlite library to use.
