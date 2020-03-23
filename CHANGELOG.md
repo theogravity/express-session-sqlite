@@ -1,4 +1,4 @@
-# UNRELEASED
+# 2.0.3 - Mon Mar 23 2020 02:22:57
 
 Update `set` to do an upsert instead of insert.
 
