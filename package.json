@@ -46,6 +46,7 @@
   },
   "homepage": "https://github.com/theogravity/express-session-sqlite#readme",
   "dependencies": {
+    "debug": "^4.1.1",
     "sql-template-strings": "^2.2.2",
     "sqlite": "^4.0.0-beta.7"
   },

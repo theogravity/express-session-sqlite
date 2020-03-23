@@ -2,6 +2,8 @@ import { open, Database } from 'sqlite'
 const SQL = require('sql-template-strings')
 import { join } from 'path'
 
+const debug = require('debug')('express-session-sqlite')
+
 export interface SqliteStoreParams {
   /**
    * The sqlite3 Database driver to use
@@ -63,10 +65,14 @@ export class SqliteStoreBase {
         throw new Error('express-session-sqlite: path not defined')
       }
 
+      debug('Opening sqlite database')
+
       this.db = await open({
         filename: this.config.path,
         driver: this.config.driver
       })
+
+      debug('Running migrations for the session table')
 
       await this.db.migrate({
         migrationsPath: join(__dirname, 'migrations')
@@ -77,6 +83,8 @@ export class SqliteStoreBase {
   }
 
   async get (sid: string): Promise<Express.SessionData | null> {
+    debug(`Getting session: ${sid}`)
+
     await this.init()
     const time = new Date().getTime()
     const resp = await this.db.get(
@@ -88,6 +96,8 @@ export class SqliteStoreBase {
       return null
     }
 
+    debug(`Session found: ${sid}`)
+
     return JSON.parse(resp.data)
   }
 
@@ -96,6 +106,8 @@ export class SqliteStoreBase {
 
     const serialized = JSON.stringify(session)
     const msTtl = new Date().getTime() + this.config.ttl
+
+    debug(`Setting session: ${sid}`)
 
     const stmt = await this.db.prepare(
       'INSERT INTO sessions (sid, data, expires) VALUES (:sid, :data, :expires)',
@@ -111,6 +123,9 @@ export class SqliteStoreBase {
 
   async destroy (sid: string): Promise<void> {
     await this.init()
+
+    debug(`Destroying session: ${sid}`)
+
     await this.db.run(SQL`DELETE FROM sessions WHERE sid = ${this.getSid(sid)}`)
   }
 
@@ -118,6 +133,9 @@ export class SqliteStoreBase {
     await this.init()
 
     const time = new Date().getTime()
+
+    debug(`Fetching all sessions`)
+
     const data = await this.db.all(
       `SELECT * FROM sessions WHERE ${time} < expires`
     )
@@ -132,6 +150,8 @@ export class SqliteStoreBase {
 
     const time = new Date().getTime()
 
+    debug(`Getting session counts`)
+
     const data = await this.db.get(
       `SELECT count(*) as total FROM sessions WHERE ${time} < expires`
     )
@@ -140,13 +160,20 @@ export class SqliteStoreBase {
 
   async clear (): Promise<void> {
     await this.init()
+
+    debug(`Clearing all sessions`)
+
     await this.db.run(`DELETE FROM sessions`)
   }
 
   async touch (sid: string, session: Express.SessionData): Promise<void> {
+    debug(`Refreshing session: ${sid}`)
+
     await this.init()
     await this.destroy(sid)
     await this.set(sid, session)
+
+    debug(`Refresh session complete: ${sid}`)
   }
 
   /**
@@ -155,6 +182,8 @@ export class SqliteStoreBase {
   async removeExpiredSessions () {
     await this.init()
     const time = new Date().getTime()
+
+    debug(`Removing expired sessions`)
 
     await this.db.run(`DELETE FROM sessions WHERE ${time} > expires`)
   }

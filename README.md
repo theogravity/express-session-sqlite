@@ -41,3 +41,9 @@ app.use(session({
     //... don't forget other expres-session options you might need
 }))
 ```
+
+# Debugging
+
+This module uses `debug` under the name `express-session-sqlite`. When starting up your app, do the following:
+
+`$ DEBUG=express-session-sqlite node app.js`
