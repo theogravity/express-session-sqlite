@@ -1,3 +1,7 @@
+# UNRELEASED
+
+Update `set` to do an upsert instead of insert.
+
 # 2.0.2 - Mon Mar 23 2020 01:58:05
 
 - Add debug logging

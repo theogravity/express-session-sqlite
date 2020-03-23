@@ -110,7 +110,7 @@ export class SqliteStoreBase {
     debug(`Setting session: ${sid}`)
 
     const stmt = await this.db.prepare(
-      'INSERT INTO sessions (sid, data, expires) VALUES (:sid, :data, :expires)',
+      'REPLACE INTO sessions (sid, data, expires) VALUES (:sid, :data, :expires)',
       {
         ':sid': this.getSid(sid),
         ':data': serialized,
@@ -170,7 +170,6 @@ export class SqliteStoreBase {
     debug(`Refreshing session: ${sid}`)
 
     await this.init()
-    await this.destroy(sid)
     await this.set(sid, session)
 
     debug(`Refresh session complete: ${sid}`)
