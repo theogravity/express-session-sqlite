@@ -1,3 +1,9 @@
+## 2.0.5 - Tue Apr 07 2020 04:39:13
+
+**Contributor:** [Theo Gravity](https://github.com/Theo Gravity)
+
+- Update readme
+
 ## 2.0.4 - Tue Apr 07 2020 04:35:00
 
 **Contributor:** [Theo Gravity](https://github.com/Theo Gravity)
