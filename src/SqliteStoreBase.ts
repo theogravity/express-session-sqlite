@@ -1,7 +1,7 @@
 import { open, Database } from 'sqlite'
-const SQL = require('sql-template-strings')
 import { join } from 'path'
 
+const SQL = require('sql-template-strings')
 const debug = require('debug')('express-session-sqlite')
 
 export interface SqliteStoreParams {

@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import sqlite3 from 'sqlite3'
+import * as sqlite3 from 'sqlite3'
 import { SqliteStoreBase } from '../SqliteStoreBase'
 
 let store

@@ -7,6 +7,8 @@ A session store for `express-session` using SQLite.
 
 Fully unit tested. PRs welcomed.
 
+<!-- TOC -->
+
 ## Install
 
 `$ npm i express-session-sqlite sqlite3 --save`
@@ -14,8 +16,8 @@ Fully unit tested. PRs welcomed.
 ## Usage
 
 ```typescript
-import sqlite3 from 'sqlite3'
-import express from 'express'
+import * as sqlite3 from 'sqlite3'
+import * as express from 'express'
 import sqliteStoreFactory from 'express-session-sqlite'
 import session from 'express-session'
 

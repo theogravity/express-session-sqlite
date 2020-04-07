@@ -12,7 +12,11 @@ module.exports = {
     return 'CHANGELOG.md'
   },
   // ==== Options specific to prepare ====
-  newUnreleasedText: '# UNRELEASED\n\n',
+  newUnreleasedText: `## UNRELEASED
+
+**Contributor:** [{{author.name}}](https://github.com/{{author.name}})
+
+- {{{subject}}}{{{body}}}`,
   unreleasedTag: () => {
     return 'UNRELEASED'
   },

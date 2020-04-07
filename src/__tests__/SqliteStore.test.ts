@@ -1,8 +1,8 @@
 /* eslint-env jest */
 /* eslint handle-callback-err: "warn" */
 
-import sqlite3 from 'sqlite3'
-import session from 'express-session'
+import * as sqlite3 from 'sqlite3'
+import * as session from 'express-session'
 import SqliteStoreFactory from '../SqliteStore'
 
 let store
