@@ -1,3 +1,9 @@
+## 2.0.4 - Tue Apr 07 2020 04:35:00
+
+**Contributor:** [Theo Gravity](https://github.com/Theo Gravity)
+
+- Update packages to latest
+
 # 2.0.3 - Mon Mar 23 2020 02:22:57
 
 Update `set` to do an upsert instead of insert.
