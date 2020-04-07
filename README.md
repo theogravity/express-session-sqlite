@@ -8,6 +8,11 @@ A session store for `express-session` using SQLite.
 Fully unit tested. PRs welcomed.
 
 <!-- TOC -->
+- [Install](#install)
+- [Usage](#usage)
+- [Debugging](#debugging)
+
+<!-- TOC END -->
 
 ## Install
 
@@ -18,8 +23,8 @@ Fully unit tested. PRs welcomed.
 ```typescript
 import * as sqlite3 from 'sqlite3'
 import * as express from 'express'
+import * as session from 'express-session'
 import sqliteStoreFactory from 'express-session-sqlite'
-import session from 'express-session'
 
 const SqliteStore = sqliteStoreFactory(session)
 const app = express()

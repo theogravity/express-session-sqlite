@@ -1,6 +1,7 @@
-import express from 'express'
+import * as express from 'express'
+import * as sqlite3 from 'sqlite3'
+import * as session from 'express-session'
 import sqliteStoreFactory from './build'
-import session from 'express-session'
 
 const SqliteStore = sqliteStoreFactory(session)
 const app = express()
@@ -18,7 +19,8 @@ app.use(session({
     prefix: 'sess:',
     // (optional) Triggers a timer in milliseconds to run a cleanup on expired session rows.
     // Default is 5 minutes.
-    cleanupInterval: 300000
+    cleanupInterval: 300000,
+    driver: sqlite3.Database
   }),
   resave: false,
   saveUninitialized: true
