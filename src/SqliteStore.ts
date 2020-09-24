@@ -46,7 +46,7 @@ export default function sqliteStoreFactory (session): ISqliteStore {
   // dependency for this package
   class SqliteStore implements ISqliteStore {
     sqliteStore: SqliteStoreBase
-    cleanupTimer: Timeout
+    cleanupTimer: Timeout | number
 
     constructor (config: SqliteStoreParams) {
       Store.call(this, config)

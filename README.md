@@ -8,6 +8,7 @@ A session store for `express-session` using SQLite.
 Fully unit tested. PRs welcomed.
 
 <!-- TOC -->
+
 - [Install](#install)
 - [Usage](#usage)
 - [Debugging](#debugging)
