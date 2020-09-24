@@ -1,3 +1,9 @@
+## 2.0.7 - Thu Sep 24 2020 22:54:55
+
+**Contributor:** [Theo Gravity](https://github.com/Theo Gravity)
+
+- Update packages
+
 ## 2.0.6 - Sun Jul 19 2020 23:20:37
 
 **Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
