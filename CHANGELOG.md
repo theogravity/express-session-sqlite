@@ -1,3 +1,17 @@
+## 2.0.8 - Sat Dec 12 2020 20:56:27
+
+**Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
+
+- Bump ini from 1.3.5 to 1.3.8 (#3)
+
+Bumps [ini](https://github.com/isaacs/ini) from 1.3.5 to 1.3.8.
+- [Release notes](https://github.com/isaacs/ini/releases)
+- [Commits](https://github.com/isaacs/ini/compare/v1.3.5...v1.3.8)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
 ## 2.0.7 - Thu Sep 24 2020 22:54:55
 
 **Contributor:** [Theo Gravity](https://github.com/Theo Gravity)
