@@ -1,3 +1,9 @@
+## 2.0.9 - Sat May 08 2021 20:41:47
+
+**Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
+
+- Bump handlebars from 4.7.6 to 4.7.7 (#7)
+
 ## 2.0.8 - Sat Dec 12 2020 20:56:27
 
 **Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
