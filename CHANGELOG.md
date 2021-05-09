@@ -1,3 +1,19 @@
+## 2.0.10 - Sun May 09 2021 19:58:39
+
+**Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
+
+- Bump node-notifier from 8.0.0 to 8.0.2 (#8)
+
+Bumps [node-notifier](https://github.com/mikaelbr/node-notifier) from 8.0.0 to 8.0.2.
+- [Release notes](https://github.com/mikaelbr/node-notifier/releases)
+- [Changelog](https://github.com/mikaelbr/node-notifier/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/mikaelbr/node-notifier/compare/v8.0.0...v8.0.2)
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Theo Gravity <theo@suteki.nu>
+
 ## 2.0.9 - Sat May 08 2021 20:41:47
 
 **Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
