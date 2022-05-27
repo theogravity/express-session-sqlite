@@ -1,9 +1,9 @@
+import session from 'express-session'
 import {
   SqliteStoreBase,
   AllSessionsResult,
   SqliteStoreParams
 } from './SqliteStoreBase'
-import { inherits } from 'util'
 import Timeout = NodeJS.Timeout
 
 // This had to be done because of the dynamic
@@ -15,25 +15,25 @@ interface ISqliteStore {
   new (config: SqliteStoreParams)
   get: (
     sid: string,
-    callback: (err: any, session?: Express.SessionData | null) => void
+    callback: (err: any, session?: session.SessionData | null) => void
   ) => void
   set: (
     sid: string,
-    session: Express.SessionData,
+    session: session.SessionData,
     callback?: (err?: any) => void
   ) => void
   destroy: (sid: string, callback?: (err?: any) => void) => void
   all: (
     callback: (
       err: any,
-      obj?: { [sid: string]: Express.SessionData } | null
+      obj?: { [sid: string]: session.SessionData } | null
     ) => void
   ) => void
   length: (callback: (err: any, length?: number | null) => void) => void
   clear: (callback?: (err?: any) => void) => void
   touch: (
     sid: string,
-    session: Express.SessionData,
+    session: session.SessionData,
     callback?: (err?: any) => void
   ) => void
 }
@@ -41,15 +41,12 @@ interface ISqliteStore {
 export default function sqliteStoreFactory (session): ISqliteStore {
   const Store = session.Store
 
-  // Cannot do extends Store from express-session
-  // doing so would mean would have to include express-session as a
-  // dependency for this package
-  class SqliteStore implements ISqliteStore {
+  class SqliteStore extends Store implements ISqliteStore {
     sqliteStore: SqliteStoreBase
     cleanupTimer: Timeout | number
 
     constructor (config: SqliteStoreParams) {
-      Store.call(this, config)
+      super(config)
 
       this.sqliteStore = new SqliteStoreBase(config)
       this.cleanupTimer = setInterval(async () => {
@@ -62,10 +59,10 @@ export default function sqliteStoreFactory (session): ISqliteStore {
       }, config.cleanupInterval || 300000)
     }
 
-    get = (
+    get (
       sid: string,
-      callback: (err: any, session?: Express.SessionData | null) => void
-    ) => {
+      callback: (err: any, session?: session.SessionData | null) => void
+    ) {
       this.sqliteStore
         .get(sid)
         .then(data => {
@@ -74,18 +71,18 @@ export default function sqliteStoreFactory (session): ISqliteStore {
         .catch(callback)
     }
 
-    set = (
+    set (
       sid: string,
-      session: Express.SessionData,
+      session: session.SessionData,
       callback?: (err?: any) => void
-    ) => {
+    ) {
       this.sqliteStore
         .set(sid, session)
         .then(callback)
         .catch(callback)
     }
 
-    destroy = (sid: string, callback?: (err?: any) => void) => {
+    destroy (sid: string, callback?: (err?: any) => void) {
       this.sqliteStore
         .destroy(sid)
         .then(callback)
@@ -93,7 +90,7 @@ export default function sqliteStoreFactory (session): ISqliteStore {
     }
 
     // @ts-ignore
-    all = (callback: (err: any, obj?: AllSessionsResult) => void) => {
+    all (callback: (err: any, obj?: AllSessionsResult) => void) {
       this.sqliteStore
         .all()
         .then(data => {
@@ -102,7 +99,7 @@ export default function sqliteStoreFactory (session): ISqliteStore {
         .catch(callback)
     }
 
-    length = (callback: (err: any, length?: number | null) => void) => {
+    length (callback: (err: any, length?: number | null) => void) {
       this.sqliteStore
         .length()
         .then(length => {
@@ -111,26 +108,24 @@ export default function sqliteStoreFactory (session): ISqliteStore {
         .catch(callback)
     }
 
-    clear = (callback?: (err?: any) => void) => {
+    clear (callback?: (err?: any) => void) {
       this.sqliteStore
         .clear()
         .then(callback)
         .catch(callback)
     }
 
-    touch = (
+    touch (
       sid: string,
-      session: Express.SessionData,
+      session: session.SessionData,
       callback?: (err?: any) => void
-    ) => {
+    ) {
       this.sqliteStore
         .touch(sid, session)
         .then(callback)
         .catch(callback)
     }
   }
-
-  inherits(SqliteStore, Store)
 
   // @ts-ignore
   return SqliteStore

@@ -1,3 +1,4 @@
+import session from 'express-session'
 import { open, Database } from 'sqlite'
 import { join } from 'path'
 
@@ -34,8 +35,8 @@ export interface SqliteStoreParams {
 }
 
 export type AllSessionsResult =
-  | Express.SessionData[]
-  | { [sid: string]: Express.SessionData }
+  | session.SessionData[]
+  | { [sid: string]: session.SessionData }
   | null
 
 export class SqliteStoreBase {
@@ -82,7 +83,7 @@ export class SqliteStoreBase {
     }
   }
 
-  async get (sid: string): Promise<Express.SessionData | null> {
+  async get (sid: string): Promise<session.SessionData | null> {
     debug(`Getting session: ${sid}`)
 
     await this.init()
@@ -101,7 +102,7 @@ export class SqliteStoreBase {
     return JSON.parse(resp.data)
   }
 
-  async set (sid: string, session: Express.SessionData): Promise<void> {
+  async set (sid: string, session: session.SessionData): Promise<void> {
     await this.init()
 
     const serialized = JSON.stringify(session)
@@ -166,7 +167,7 @@ export class SqliteStoreBase {
     await this.db.run(`DELETE FROM sessions`)
   }
 
-  async touch (sid: string, session: Express.SessionData): Promise<void> {
+  async touch (sid: string, session: session.SessionData): Promise<void> {
     debug(`Refreshing session: ${sid}`)
 
     await this.init()
