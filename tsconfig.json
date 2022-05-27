@@ -3,26 +3,21 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "module": "commonjs",
-    "target": "ES2018",
+    "target": "ES2019",
     "sourceMap": true,
     "moduleResolution": "node",
     "outDir": "build",
     "baseUrl": ".",
     "declaration": true,
     "lib": [
-      "ES2018",
-      "dom"
+      "ES2019",
     ],
-    "paths": {
-      "*": [
-        "node_modules/*"
-      ]
-    }
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
-    "src/**/__tests__/*"
+    "src/**/__tests__/*",
   ]
 }

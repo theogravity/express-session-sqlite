@@ -104,7 +104,6 @@ describe('SqliteStore', () => {
   })
 
   it('should handle expired sessions', done => {
-    // @ts-ignore
     const s = new SqliteStore({
       driver: sqlite3.Database,
       path: ':memory:',

@@ -15,14 +15,10 @@ npm-login: &npm-login
     command: |
       echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
 
-orbs:
-  node: circleci/node@1.1.6
-
 jobs:
   test:
-    executor:
-      name: node/default
-      tag: '12'
+    docker:
+      - image: cimg/node:16.15
     working_directory: ~/repo
     steps:
       # Check out the git repo to the working directory
@@ -56,9 +52,8 @@ jobs:
           command: |
             npm run build
   publish:
-    executor:
-      name: node/default
-      tag: '10'
+    docker:
+      - image: cimg/node:16.15
     working_directory: ~/repo
     steps:
       # Check out the git repo to the working directory
