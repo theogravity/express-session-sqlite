@@ -1,3 +1,11 @@
+## 2.1.1 - Fri May 27 2022 11:43:11
+
+**Contributor:** [Theo Gravity](https://github.com/Theo Gravity)
+
+- Update dependencies, remove deprecated inherits (#16)
+
+This is a slight optimization update.
+
 ## 2.0.10 - Sun May 09 2021 19:58:39
 
 **Contributor:** [dependabot[bot]](https://github.com/dependabot[bot])
