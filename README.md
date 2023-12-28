@@ -30,8 +30,7 @@ import sqliteStoreFactory from 'express-session-sqlite'
 const SqliteStore = sqliteStoreFactory(session)
 const app = express()
 
-app.use(session({
-    store: new SqliteStore({
+const store = new SqliteStore({
       // Database library to use. Any library is fine as long as the API is compatible
       // with sqlite3, such as sqlite3-offline
       driver: sqlite3.Database,
@@ -45,9 +44,20 @@ app.use(session({
       // (optional) Adjusts the cleanup timer in milliseconds for deleting expired session rows.
       // Default is 5 minutes.
       cleanupInterval: 300000
-    }),
-    //... don't forget other expres-session options you might need
+    })
+
+app.use(session({
+    store,
+    //... don't forget other express-session options you might need
 }))
+```
+
+## Clean up stale sessions
+
+There may be stale sessions that are left in the db. You may need a background process that executes the following:
+
+```typescript
+await store.removeExpiredSessions()
 ```
 
 # Debugging
